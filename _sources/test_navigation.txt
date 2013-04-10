@@ -1,0 +1,7 @@
+test_navigation Module
+======================
+
+.. automodule:: test_navigation
+    :members:
+    :undoc-members:
+    :show-inheritance:
