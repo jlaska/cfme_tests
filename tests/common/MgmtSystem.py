@@ -8,93 +8,95 @@ from pysphere.vi_task import VITask
 from ovirtsdk.api import API
 
 class MgmtSystemAPIBase(object):
-    """ Base interface class for Management Systems. """
+    '''
+    Base interface class for Management Systems.
+    '''
     __metaclass__ = ABCMeta
 
     @abstractmethod
     def start_vm(self, vm_name):
         '''
-            Starts a vm.
+        Starts a vm.
 
-            :param vm_name: name of the vm to be started
-            :type  vm_name: str
-            :return: whether vm action has been initiated properly
-            :rtype: boolean
+        :param vm_name: name of the vm to be started
+        :type  vm_name: str
+        :return: whether vm action has been initiated properly
+        :rtype: boolean
         '''
         raise NotImplementedError('start_vm not implemented.')
 
     @abstractmethod
     def stop_vm(self, vm_name):
         '''
-            Stops a vm.
+        Stops a vm.
 
-            :param vm_name: name of the vm to be stopped
-            :type  vm_name: str
-            :return: whether vm action has been initiated properly
-            :rtype: boolean
+        :param vm_name: name of the vm to be stopped
+        :type  vm_name: str
+        :return: whether vm action has been initiated properly
+        :rtype: boolean
         '''
         raise NotImplementedError('stop_vm not implemented.')
 
     @abstractmethod
     def create_vm(self, vm_name):
         '''
-            Creates a vm.
+        Creates a vm.
 
-            :param vm_name: name of the vm to be created
-            :type  vm_name: str
-            :return: whether vm action has been initiated properly
-            :rtype: boolean
+        :param vm_name: name of the vm to be created
+        :type  vm_name: str
+        :return: whether vm action has been initiated properly
+        :rtype: boolean
         '''
         raise NotImplementedError('create_vm not implemented.')
 
     @abstractmethod
     def delete_vm(self, vm_name):
         '''
-            Deletes a vm.
+        Deletes a vm.
 
-            :param vm_name: name of the vm to be deleted
-            :type  vm_name: str
-            :return: whether vm action has been initiated properly
-            :rtype: boolean
+        :param vm_name: name of the vm to be deleted
+        :type  vm_name: str
+        :return: whether vm action has been initiated properly
+        :rtype: boolean
         '''
         raise NotImplementedError('delete_vm not implemented.')
 
     @abstractmethod
     def restart_vm(self, vm_name):
         '''
-            Restart a vm.
+        Restart a vm.
 
-            :param vm_name: name of the vm to be restarted
-            :type  vm_name: str
-            :return: whether vm stop/start have been initiated properly
-            :rtype: boolean
+        :param vm_name: name of the vm to be restarted
+        :type  vm_name: str
+        :return: whether vm stop/start have been initiated properly
+        :rtype: boolean
         '''
         raise NotImplementedError('restart_vm not implemented.')
 
     @abstractmethod
     def list_vm(self, **kwargs):
         '''
-            Returns a list of vm names.
+        Returns a list of vm names.
 
-            :return: list of vm names
-            :rtype: list
+        :return: list of vm names
+        :rtype: list
         '''
         raise NotImplementedError('list_vm not implemented.')
 
     @abstractmethod
     def info(self):
         '''
-            Returns basic information about the mgmt system.
+        Returns basic information about the mgmt system.
 
-            :return: string representation of name/version of mgmt system.
-            :rtype: str
+        :return: string representation of name/version of mgmt system.
+        :rtype: str
         '''
         raise NotImplementedError('info not implemented.')
 
     @abstractmethod
     def disconnect(self):
         '''
-            Disconnect the API from mgmt system.
+        Disconnect the API from mgmt system.
         '''
         raise NotImplementedError('disconnect not implemented.')
 
