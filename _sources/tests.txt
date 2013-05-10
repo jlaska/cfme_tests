@@ -1,0 +1,20 @@
+tests Package
+=============
+
+:mod:`conftest` Module
+----------------------
+
+.. automodule:: tests.conftest
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    tests.common
+    tests.soap_api
+    tests.ui
+

@@ -1,0 +1,11 @@
+control Package
+===============
+
+:mod:`test_import_policies` Module
+----------------------------------
+
+.. automodule:: tests.ui.control.test_import_policies
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

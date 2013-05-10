@@ -1,0 +1,27 @@
+soap_api Package
+================
+
+:mod:`soap_base` Module
+-----------------------
+
+.. automodule:: tests.soap_api.soap_base
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_connectivity` Module
+-------------------------------
+
+.. automodule:: tests.soap_api.test_connectivity
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_smoke` Module
+------------------------
+
+.. automodule:: tests.soap_api.test_smoke
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

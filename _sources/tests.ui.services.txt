@@ -1,0 +1,11 @@
+services Package
+================
+
+:mod:`test_vm_power_control` Module
+-----------------------------------
+
+.. automodule:: tests.ui.services.test_vm_power_control
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

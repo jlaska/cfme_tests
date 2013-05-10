@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tests.ui.infrastructure.test_management_systems &mdash; CloudForms Management Engine Test library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="CloudForms Management Engine Test library 0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tests.ui.infrastructure.test_management_systems</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">unittestzero</span> <span class="kn">import</span> <span class="n">Assert</span>
+
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">,</span>  <span class="c"># IGNORE:E1101</span>
+                <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;vsphere5&quot;</span><span class="p">])</span>
+<div class="viewcode-block" id="management_system"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.management_system">[docs]</a><span class="k">def</span> <span class="nf">management_system</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">cfme_data</span><span class="p">,</span> <span class="n">mgmtsys_page</span><span class="p">):</span>
+    <span class="n">param</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">param</span>
+    <span class="k">def</span> <span class="nf">fin</span><span class="p">():</span>
+        <span class="c"># Go back to the Management Systems list</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">mgmtsys_page</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">site_navigation_menu</span><span class="p">(</span><span class="s">&quot;Infrastructure&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sub_navigation_menu</span><span class="p">(</span><span class="s">&quot;Management Systems&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">ms_pg</span><span class="o">.</span><span class="n">select_management_system</span><span class="p">(</span><span class="n">cfme_data</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;management_systems&quot;</span><span class="p">][</span><span class="n">param</span><span class="p">][</span><span class="s">&quot;name&quot;</span><span class="p">])</span>
+        <span class="n">ms_pg</span><span class="o">.</span><span class="n">click_on_remove_management_system</span><span class="p">()</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">addfinalizer</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cfme_data</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;management_systems&quot;</span><span class="p">][</span><span class="n">param</span><span class="p">]</span>
+</div>
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="mgmtsys_page"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.mgmtsys_page">[docs]</a><span class="k">def</span> <span class="nf">mgmtsys_page</span><span class="p">(</span><span class="n">home_page_logged_in</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">home_page_logged_in</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">site_navigation_menu</span><span class="p">(</span><span class="s">&quot;Infrastructure&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sub_navigation_menu</span><span class="p">(</span><span class="s">&quot;Management Systems&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</div>
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="has_at_least_one_management_system"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.has_at_least_one_management_system">[docs]</a><span class="k">def</span> <span class="nf">has_at_least_one_management_system</span><span class="p">(</span><span class="n">home_page_logged_in</span><span class="p">):</span>
+    <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">home_page_logged_in</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">site_navigation_menu</span><span class="p">(</span><span class="s">&quot;Infrastructure&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sub_navigation_menu</span><span class="p">(</span><span class="s">&quot;Management Systems&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">sleep_time</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">quadicons</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ms_pg</span><span class="o">.</span><span class="n">selenium</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">)</span>
+        <span class="n">sleep_time</span> <span class="o">*=</span> <span class="mi">2</span>
+</div>
+<span class="nd">@pytest.mark.nondestructive</span>  <span class="c"># IGNORE:E1101</span>
+<span class="nd">@pytest.mark.usefixtures</span><span class="p">(</span><span class="s">&quot;maximized&quot;</span><span class="p">)</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="TestManagementSystems"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.TestManagementSystems">[docs]</a><span class="k">class</span> <span class="nc">TestManagementSystems</span><span class="p">:</span>
+<div class="viewcode-block" id="TestManagementSystems.test_discover_management_systems_starts"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.TestManagementSystems.test_discover_management_systems_starts">[docs]</a>    <span class="k">def</span> <span class="nf">test_discover_management_systems_starts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mozwebqa</span><span class="p">,</span> <span class="n">mgmtsys_page</span><span class="p">,</span> <span class="n">management_system</span><span class="p">):</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">mgmtsys_page</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">msd_pg</span> <span class="o">=</span> <span class="n">ms_pg</span><span class="o">.</span><span class="n">click_on_discover_management_systems</span><span class="p">()</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msd_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">msd_pg</span><span class="o">.</span><span class="n">discover_systems</span><span class="p">(</span><span class="n">management_system</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">],</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;discovery_range&quot;</span><span class="p">][</span><span class="s">&quot;start&quot;</span><span class="p">],</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;discovery_range&quot;</span><span class="p">][</span><span class="s">&quot;end&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&quot;Management System: Discovery successfully initiated&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestManagementSystems.test_that_checks_flash_with_no_management_types_checked"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.TestManagementSystems.test_that_checks_flash_with_no_management_types_checked">[docs]</a>    <span class="k">def</span> <span class="nf">test_that_checks_flash_with_no_management_types_checked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mozwebqa</span><span class="p">,</span> <span class="n">mgmtsys_page</span><span class="p">):</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">mgmtsys_page</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">msd_pg</span> <span class="o">=</span> <span class="n">ms_pg</span><span class="o">.</span><span class="n">click_on_discover_management_systems</span><span class="p">()</span>
+        <span class="n">msd_pg</span><span class="o">.</span><span class="n">click_on_start</span><span class="p">()</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msd_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&quot;At least 1 item must be selected for discovery&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestManagementSystems.test_that_checks_flash_when_discovery_canceled"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.TestManagementSystems.test_that_checks_flash_when_discovery_canceled">[docs]</a>    <span class="k">def</span> <span class="nf">test_that_checks_flash_when_discovery_canceled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mozwebqa</span><span class="p">,</span> <span class="n">mgmtsys_page</span><span class="p">):</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">mgmtsys_page</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">msd_pg</span> <span class="o">=</span> <span class="n">ms_pg</span><span class="o">.</span><span class="n">click_on_discover_management_systems</span><span class="p">()</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">msd_pg</span><span class="o">.</span><span class="n">click_on_cancel</span><span class="p">()</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&quot;Management System Discovery was cancelled by the user&quot;</span><span class="p">)</span>
+        
+    <span class="c"># TODO: Change to use a fixture that uses Add Management System, instead of Discover.</span>
+    <span class="c"># This will allow to more easily specify the start and end states</span></div>
+    <span class="nd">@pytest.mark.usefixtures</span><span class="p">(</span><span class="s">&quot;has_at_least_one_management_system&quot;</span><span class="p">)</span> <span class="c">#IGNORE:E1101</span>
+<div class="viewcode-block" id="TestManagementSystems.test_edit_management_system"><a class="viewcode-back" href="../../../../tests.ui.infrastructure.html#tests.ui.infrastructure.test_management_systems.TestManagementSystems.test_edit_management_system">[docs]</a>    <span class="k">def</span> <span class="nf">test_edit_management_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mozwebqa</span><span class="p">,</span> <span class="n">mgmtsys_page</span><span class="p">,</span> <span class="n">management_system</span><span class="p">):</span>
+        <span class="n">ms_pg</span> <span class="o">=</span> <span class="n">mgmtsys_page</span>
+        <span class="n">ms_pg</span><span class="o">.</span><span class="n">select_management_system</span><span class="p">(</span><span class="n">management_system</span><span class="p">[</span><span class="s">&quot;default_name&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ms_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">selected</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;More than one quadicon was selected&quot;</span><span class="p">)</span>
+        <span class="n">mse_pg</span> <span class="o">=</span> <span class="n">ms_pg</span><span class="o">.</span><span class="n">click_on_edit_management_systems</span><span class="p">()</span>
+        <span class="n">msdetail_pg</span> <span class="o">=</span> <span class="n">mse_pg</span><span class="o">.</span><span class="n">edit_management_system</span><span class="p">(</span><span class="n">management_system</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msdetail_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&quot;Management System </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s"> was saved&quot;</span> <span class="o">%</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msdetail_pg</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msdetail_pg</span><span class="o">.</span><span class="n">hostname</span> <span class="o">==</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;hostname&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msdetail_pg</span><span class="o">.</span><span class="n">zone</span> <span class="o">==</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;server_zone&quot;</span><span class="p">])</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">msdetail_pg</span><span class="o">.</span><span class="n">vnc_port_range</span> <span class="o">==</span> <span class="n">management_system</span><span class="p">[</span><span class="s">&quot;host_vnc_port&quot;</span><span class="p">])</span>
+        <span class="c"># if msdetail_pg.credentials_validity == &quot;None&quot;:</span>
+            <span class="c"># Try reloading the page once. If we get valid then, ok. Otherwise, failure</span>
+        <span class="c">#    msdetail_pg.selenium.refresh()</span>
+        <span class="c"># Assert.true(msdetail_pg.credentials_validity == &quot;Valid&quot;)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Brad Crochet.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>common Package &mdash; CloudForms Management Engine Test library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="CloudForms Management Engine Test library 0.1 documentation" href="index.html" />
+    <link rel="up" title="tests Package" href="tests.html" />
+    <link rel="next" title="soap_api Package" href="tests.soap_api.html" />
+    <link rel="prev" title="tests Package" href="tests.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tests.soap_api.html" title="soap_api Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tests.html" title="tests Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="tests.html" accesskey="U">tests Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="common-package">
+<h1>common Package<a class="headerlink" href="#common-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-tests.common.MgmtSystem">
+<span id="mgmtsystem-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">MgmtSystem</span></tt> Module<a class="headerlink" href="#module-tests.common.MgmtSystem" title="Permalink to this headline">¶</a></h2>
+<p>Base module for Management Systems classes.</p>
+<dl class="class">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase">
+<em class="property">class </em><tt class="descclassname">tests.common.MgmtSystem.</tt><tt class="descname">MgmtSystemAPIBase</tt><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base interface class for Management Systems.</p>
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.create_vm">
+<tt class="descname">create_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.create_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.create_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a vm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vm_name</strong> (<em>str</em>) &#8211; name of the vm to be created</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether vm action has been initiated properly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.delete_vm">
+<tt class="descname">delete_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.delete_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.delete_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a vm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vm_name</strong> (<em>str</em>) &#8211; name of the vm to be deleted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether vm action has been initiated properly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.disconnect">
+<tt class="descname">disconnect</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect the API from mgmt system.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.info">
+<tt class="descname">info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns basic information about the mgmt system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">string representation of name/version of mgmt system.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.list_vm">
+<tt class="descname">list_vm</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.list_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.list_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of vm names.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of vm names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.restart_vm">
+<tt class="descname">restart_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.restart_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.restart_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restart a vm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vm_name</strong> (<em>str</em>) &#8211; name of the vm to be restarted</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether vm stop/start have been initiated properly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.start_vm">
+<tt class="descname">start_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.start_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.start_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts a vm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vm_name</strong> (<em>str</em>) &#8211; name of the vm to be started</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether vm action has been initiated properly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.MgmtSystemAPIBase.stop_vm">
+<tt class="descname">stop_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#MgmtSystemAPIBase.stop_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.MgmtSystemAPIBase.stop_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops a vm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>vm_name</strong> (<em>str</em>) &#8211; name of the vm to be stopped</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">whether vm action has been initiated properly</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tests.common.MgmtSystem.RHEVMSystem">
+<em class="property">class </em><tt class="descclassname">tests.common.MgmtSystem.</tt><tt class="descname">RHEVMSystem</tt><big>(</big><em>hostname='localhost'</em>, <em>username='root'</em>, <em>password='rootpwd'</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tests.common.MgmtSystem.MgmtSystemAPIBase" title="tests.common.MgmtSystem.MgmtSystemAPIBase"><tt class="xref py py-class docutils literal"><span class="pre">tests.common.MgmtSystem.MgmtSystemAPIBase</span></tt></a></p>
+<blockquote>
+<div><p>Client to RHEVM API</p>
+<p>This class piggy backs off ovirtsdk.</p>
+<p>Benefits of ovirtsdk: 
+- Don&#8217;t need intimite knowledge w/ RHEVM api itself. 
+Detriments of ovirtsdk:
+- Response to most quaries are returned as an object rather than a string.</p>
+<blockquote>
+<div>This makes it harder to do simple stuff like getting the status of a vm.</div></blockquote>
+<ul class="simple">
+<li>Because of this, it makes listing VMs based on <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs impossible 
+since ovirtsdk relies on re class to find matches.</li>
+</ul>
+<dl class="docutils">
+<dt>I.E. List out VM with this name (positive case)</dt>
+<dd><p class="first">Ideal: self.api.vms.list(name=&#8217;test_vm&#8217;)
+Underneath the hood:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>ovirtsdk fetches list of all vms [ovirtsdk.infrastructure.brokers.VM object, ...]</li>
+<li>ovirtsdk then tries to filter the result using re.
+- tries to look for &#8216;name&#8217; attr in ovirtsdk.infrastructure.brokers.VM object
+- found name attribute, in this case, the type of the value of the attribute is string.
+- match() succeed in comparing the value to &#8216;test_vm&#8217;</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>I.E. List out VM with that&#8217;s powered on (negative case)</dt>
+<dd><p class="first">Ideal: self.api.vms.list(status=&#8217;up&#8217;)
+Underneath the hood:</p>
+<blockquote class="last">
+<div><ul>
+<li><dl class="first docutils">
+<dt>&#8216;^same step as above except^&#8217;</dt>
+<dd><ul class="first last simple">
+<li>found status attribute, in this case, the type of the value of the attribute is .</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>virtsdk.xml.params.Status</dt>
+<dd><blockquote class="first">
+<div><blockquote>
+<div><ul class="simple">
+<li>match() failed because class is compared to string &#8216;up&#8217;</li>
+</ul>
+</div></blockquote>
+<p>This problem should be attributed to how RHEVM api was designed rather than how ovirtsdk handles RHEVM api responses.</p>
+</div></blockquote>
+<ul class="last">
+<li><p class="first">Obj. are not updated after action calls.
+- I.E.</p>
+<blockquote>
+<div><p>vm = api.vms.get(name=&#8217;test_vm&#8217;)
+vm.status.get_state() # returns &#8216;down&#8217;
+vm.start()
+# wait a few mins
+vm.status.get_state() # returns &#8216;down&#8217;; wtf?</p>
+<p>vm = api.vms.get(name=&#8217;test_vm&#8217;)
+vm.status.get_state() # returns &#8216;up&#8217;</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.create_vm">
+<tt class="descname">create_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.create_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.create_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of create_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.delete_vm">
+<tt class="descname">delete_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.delete_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.delete_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of delete_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.disconnect">
+<tt class="descname">disconnect</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of disconnect.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.info">
+<tt class="descname">info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of info.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.list_vm">
+<tt class="descname">list_vm</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.list_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.list_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of list_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.restart_vm">
+<tt class="descname">restart_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.restart_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.restart_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of restart_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.start_vm">
+<tt class="descname">start_vm</tt><big>(</big><em>vm_name=None</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.start_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.start_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of start_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.RHEVMSystem.stop_vm">
+<tt class="descname">stop_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#RHEVMSystem.stop_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.RHEVMSystem.stop_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>RHEVMSystem implementation of stop_vm.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tests.common.MgmtSystem.VMWareSystem">
+<em class="property">class </em><tt class="descclassname">tests.common.MgmtSystem.</tt><tt class="descname">VMWareSystem</tt><big>(</big><em>hostname='localhost'</em>, <em>username='root'</em>, <em>password='rootpwd'</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tests.common.MgmtSystem.MgmtSystemAPIBase" title="tests.common.MgmtSystem.MgmtSystemAPIBase"><tt class="xref py py-class docutils literal"><span class="pre">tests.common.MgmtSystem.MgmtSystemAPIBase</span></tt></a></p>
+<p>Client to Vsphere API</p>
+<p>This class piggy backs off pysphere.</p>
+<dl class="docutils">
+<dt>Benefits of pysphere:</dt>
+<dd><ul class="first last simple">
+<li>Don&#8217;t need intimate knowledge w/ vsphere api itself.</li>
+</ul>
+</dd>
+<dt>Detriments of pysphere:</dt>
+<dd><ul class="first last simple">
+<li>Response often are not detailed enough.</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.create_vm">
+<tt class="descname">create_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.create_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.create_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of create_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.delete_vm">
+<tt class="descname">delete_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.delete_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.delete_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of delete_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.disconnect">
+<tt class="descname">disconnect</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of disconnect.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.info">
+<tt class="descname">info</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of info.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.list_vm">
+<tt class="descname">list_vm</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.list_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.list_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of list_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.restart_vm">
+<tt class="descname">restart_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.restart_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.restart_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of restart_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.start_vm">
+<tt class="descname">start_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.start_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.start_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of start_vm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tests.common.MgmtSystem.VMWareSystem.stop_vm">
+<tt class="descname">stop_vm</tt><big>(</big><em>vm_name</em><big>)</big><a class="reference internal" href="_modules/tests/common/MgmtSystem.html#VMWareSystem.stop_vm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tests.common.MgmtSystem.VMWareSystem.stop_vm" title="Permalink to this definition">¶</a></dt>
+<dd><p>VMWareSystem implementation of stop_vm.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">common Package</a><ul>
+<li><a class="reference internal" href="#module-tests.common.MgmtSystem"><tt class="docutils literal"><span class="pre">MgmtSystem</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tests.html"
+                        title="previous chapter">tests Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tests.soap_api.html"
+                        title="next chapter">soap_api Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tests.common.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tests.soap_api.html" title="soap_api Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tests.html" title="tests Package"
+             >previous</a> |</li>
+        <li><a href="index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="tests.html" >tests Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Brad Crochet.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

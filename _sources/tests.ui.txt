@@ -1,0 +1,29 @@
+ui Package
+==========
+
+:mod:`test_login` Module
+------------------------
+
+.. automodule:: tests.ui.test_login
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_navigation` Module
+-----------------------------
+
+.. automodule:: tests.ui.test_navigation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    tests.ui.automate
+    tests.ui.control
+    tests.ui.infrastructure
+    tests.ui.services
+

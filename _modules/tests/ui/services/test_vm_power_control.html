@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tests.ui.services.test_vm_power_control &mdash; CloudForms Management Engine Test library 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="CloudForms Management Engine Test library 0.1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for tests.ui.services.test_vm_power_control</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">unittestzero</span> <span class="kn">import</span> <span class="n">Assert</span>
+
+<span class="c"># TODO: write snmp trap receiver fixture to verify host shutdown/reboots</span>
+
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="vm_system"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.vm_system">[docs]</a><span class="k">def</span> <span class="nf">vm_system</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">&#39;pwr-ctl-vm-1-dnd&#39;</span>
+    </div>
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="vm_pg"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.vm_pg">[docs]</a><span class="k">def</span> <span class="nf">vm_pg</span><span class="p">(</span><span class="n">mozwebqa</span><span class="p">,</span> <span class="n">home_page_logged_in</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">):</span>
+    <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">home_page_logged_in</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">site_navigation_menu</span><span class="p">(</span><span class="s">&quot;Services&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sub_navigation_menu</span><span class="p">(</span><span class="s">&quot;Virtual Machines&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">is_the_current_page</span><span class="p">,</span> <span class="s">&quot;not on correct page&quot;</span><span class="p">)</span>
+    <span class="n">vm_pg</span><span class="o">.</span><span class="n">find_vm_page</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vm_pg</span>
+</div>
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<span class="c"># TODO: change this to use calls to the correct virt api to setup state</span>
+<div class="viewcode-block" id="verify_vm_running"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.verify_vm_running">[docs]</a><span class="k">def</span> <span class="nf">verify_vm_running</span><span class="p">(</span><span class="n">vm_pg</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">):</span>
+    <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">does_quadicon_exist</span><span class="p">(</span><span class="n">vm_system</span><span class="p">),</span> <span class="s">&quot;vm not found&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">!=</span> <span class="s">&#39;on&#39;</span><span class="p">:</span> 
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_on</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vm_pg</span>
+</div>
+<span class="nd">@pytest.fixture</span>  <span class="c"># IGNORE:E1101</span>
+<span class="c"># TODO: change this to use calls to the correct virt api to setup state</span>
+<div class="viewcode-block" id="verify_vm_stopped"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.verify_vm_stopped">[docs]</a><span class="k">def</span> <span class="nf">verify_vm_stopped</span><span class="p">(</span><span class="n">vm_pg</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">):</span>
+    <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">does_quadicon_exist</span><span class="p">(</span><span class="n">vm_system</span><span class="p">),</span> <span class="s">&quot;vm not found&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">!=</span> <span class="s">&#39;off&#39;</span><span class="p">:</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_off</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vm_pg</span>
+
+</div>
+<span class="nd">@pytest.mark.nondestructive</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="TestVmPowerControl"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmPowerControl">[docs]</a><span class="k">class</span> <span class="nc">TestVmPowerControl</span><span class="p">:</span>
+
+<div class="viewcode-block" id="TestVmPowerControl.test_vm_power_on"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmPowerControl.test_vm_power_on">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_stopped</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_stopped</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_on</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;Start initiated&quot;</span><span class="p">))</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="s">&quot;vm not running&quot;</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="TestVmPowerControl.test_vm_power_on_cancel"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmPowerControl.test_vm_power_on_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_on_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_stopped</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_stopped</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_on</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span> 
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">find_vm_page</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="s">&quot;vm running&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestVmPowerControl.test_vm_power_off"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmPowerControl.test_vm_power_off">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_running</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_running</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_off</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">flash</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;Stop initiated&quot;</span><span class="p">))</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="s">&quot;vm running&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestVmPowerControl.test_vm_power_off_cancel"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmPowerControl.test_vm_power_off_cancel">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_off_cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_running</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_running</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">power_off</span><span class="p">([</span><span class="n">vm_system</span><span class="p">],</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span> 
+        <span class="n">vm_pg</span><span class="o">.</span><span class="n">find_vm_page</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_pg</span><span class="o">.</span><span class="n">quadicon_region</span><span class="o">.</span><span class="n">get_quadicon_by_title</span><span class="p">(</span><span class="n">vm_system</span><span class="p">)</span><span class="o">.</span><span class="n">current_state</span> <span class="o">==</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="s">&quot;vm not running&quot;</span><span class="p">)</span>
+</div></div>
+<span class="nd">@pytest.mark.nondestructive</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="TestVmDetailsPowerControl"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmDetailsPowerControl">[docs]</a><span class="k">class</span> <span class="nc">TestVmDetailsPowerControl</span><span class="p">:</span>
+
+<div class="viewcode-block" id="TestVmDetailsPowerControl.test_vm_power_on"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmDetailsPowerControl.test_vm_power_on">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_stopped</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_stopped</span>
+        <span class="n">vm_details</span> <span class="o">=</span> <span class="n">vm_pg</span><span class="o">.</span><span class="n">find_vm_page</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span><span class="s">&#39;off&#39;</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">power_state</span> <span class="o">==</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="s">&quot;power state pre-req wrong&quot;</span> <span class="p">)</span>
+        <span class="n">last_boot_time</span> <span class="o">=</span> <span class="n">vm_details</span><span class="o">.</span><span class="n">last_boot_time</span>
+        <span class="n">state_chg_time</span> <span class="o">=</span> <span class="n">vm_details</span><span class="o">.</span><span class="n">last_pwr_state_change</span>
+        <span class="n">vm_details</span><span class="o">.</span><span class="n">power_button</span><span class="o">.</span><span class="n">power_on</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">vm_details</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">power_state</span> <span class="o">==</span> <span class="s">&#39;on&#39;</span><span class="p">,</span> <span class="s">&quot;power state incorrect&quot;</span> <span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">last_boot_time</span> <span class="o">!=</span> <span class="n">last_boot_time</span><span class="p">,</span> <span class="s">&quot;last boot time failed to update&quot;</span> <span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">last_pwr_state_change</span> <span class="o">!=</span> <span class="n">state_chg_time</span><span class="p">,</span> <span class="s">&quot;last state chg time failed to update&quot;</span> <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TestVmDetailsPowerControl.test_vm_power_off"><a class="viewcode-back" href="../../../../tests.ui.services.html#tests.ui.services.test_vm_power_control.TestVmDetailsPowerControl.test_vm_power_off">[docs]</a>    <span class="k">def</span> <span class="nf">test_vm_power_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm_system</span><span class="p">,</span> <span class="n">verify_vm_running</span><span class="p">):</span>
+        <span class="n">vm_pg</span> <span class="o">=</span> <span class="n">verify_vm_running</span>
+        <span class="n">vm_details</span> <span class="o">=</span> <span class="n">vm_pg</span><span class="o">.</span><span class="n">find_vm_page</span><span class="p">(</span><span class="n">vm_system</span><span class="p">,</span><span class="s">&#39;on&#39;</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">power_state</span> <span class="o">==</span> <span class="s">&#39;on&#39;</span> <span class="p">,</span> <span class="s">&quot;power state pre-req wrong&quot;</span><span class="p">)</span>
+        <span class="n">last_boot_time</span> <span class="o">=</span> <span class="n">vm_details</span><span class="o">.</span><span class="n">last_boot_time</span>
+        <span class="n">state_chg_time</span> <span class="o">=</span> <span class="n">vm_details</span><span class="o">.</span><span class="n">last_pwr_state_change</span>
+        <span class="n">vm_details</span><span class="o">.</span><span class="n">power_button</span><span class="o">.</span><span class="n">power_off</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">vm_details</span><span class="o">.</span><span class="n">wait_for_vm_state_change</span><span class="p">(</span><span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">power_state</span> <span class="o">==</span> <span class="s">&#39;off&#39;</span><span class="p">,</span> <span class="s">&quot;power state incorrect&quot;</span> <span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">last_boot_time</span> <span class="o">==</span> <span class="n">last_boot_time</span><span class="p">,</span> <span class="s">&quot;last boot time failed to update&quot;</span> <span class="p">)</span>
+        <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">vm_details</span><span class="o">.</span><span class="n">last_pwr_state_change</span> <span class="o">!=</span> <span class="n">state_chg_time</span><span class="p">,</span> <span class="s">&quot;last state chg time failed to update&quot;</span> <span class="p">)</span>
+
+    <span class="c">#def test_vm_power_on_cancel(self,  vm_system, verify_vm_stopped):</span>
+    <span class="c">#def test_vm_power_off_cancel(self, vm_system, verify_vm_running):</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Brad Crochet.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

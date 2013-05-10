@@ -1,0 +1,27 @@
+automate Package
+================
+
+:mod:`test_export_automate` Module
+----------------------------------
+
+.. automodule:: tests.ui.automate.test_export_automate
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_import_automate` Module
+----------------------------------
+
+.. automodule:: tests.ui.automate.test_import_automate
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`test_reset_automate` Module
+---------------------------------
+
+.. automodule:: tests.ui.automate.test_reset_automate
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
