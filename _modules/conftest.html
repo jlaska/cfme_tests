@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>conftest &mdash; cfme_tests .01 documentation</title>
+    <title>conftest &mdash; CloudForms Management Engine Test library 0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '.01',
+        VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="cfme_tests .01 documentation" href="../index.html" />
+    <link rel="top" title="CloudForms Management Engine Test library 0.1 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
@@ -35,7 +33,10 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">cfme_tests .01 documentation</a> &raquo;</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -46,29 +47,37 @@
           <div class="body">
             
   <h1>Source code for conftest</h1><div class="highlight"><pre>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">Created on Mar 4, 2013</span>
-
-<span class="sd">@author: bcrochet</span>
-<span class="sd">&#39;&#39;&#39;</span>
-
 <span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">from</span> <span class="nn">unittestzero</span> <span class="kn">import</span> <span class="n">Assert</span>
 
-<span class="nd">@pytest.fixture</span>
-<div class="viewcode-block" id="home_page_logged_in"><a class="viewcode-back" href="../conftest.html#conftest.home_page_logged_in">[docs]</a><span class="k">def</span> <span class="nf">home_page_logged_in</span><span class="p">(</span><span class="n">mozwebqa</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">pages.login</span> <span class="kn">import</span> <span class="n">LoginPage</span>
-    <span class="n">login_pg</span> <span class="o">=</span> <span class="n">LoginPage</span><span class="p">(</span><span class="n">mozwebqa</span><span class="p">)</span>
-    <span class="n">login_pg</span><span class="o">.</span><span class="n">go_to_login_page</span><span class="p">()</span>
-    <span class="n">home_pg</span> <span class="o">=</span> <span class="n">login_pg</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
-    <span class="n">Assert</span><span class="o">.</span><span class="n">true</span><span class="p">(</span><span class="n">home_pg</span><span class="o">.</span><span class="n">is_logged_in</span><span class="p">,</span> <span class="s">&quot;Could not determine if logged in&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">home_pg</span>
+<span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">yaml</span>
+    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+
+<div class="viewcode-block" id="pytest_addoption"><a class="viewcode-back" href="../conftest.html#conftest.pytest_addoption">[docs]</a><span class="k">def</span> <span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">getgroup</span><span class="p">(</span><span class="s">&#39;cfme&#39;</span><span class="p">,</span> <span class="s">&#39;cfme&#39;</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">_addoption</span><span class="p">(</span><span class="s">&#39;--cfmedata&#39;</span><span class="p">,</span>
+                     <span class="n">action</span><span class="o">=</span><span class="s">&#39;store&#39;</span><span class="p">,</span>
+                     <span class="n">dest</span><span class="o">=</span><span class="s">&#39;cfme_data_filename&#39;</span><span class="p">,</span>
+                     <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;path&#39;</span><span class="p">,</span>
+                     <span class="n">help</span><span class="o">=</span><span class="s">&#39;location of yaml file containing fixture data&#39;</span><span class="p">)</span> 
 </div>
-<span class="nd">@pytest.fixture</span>
-<div class="viewcode-block" id="maximized"><a class="viewcode-back" href="../conftest.html#conftest.maximized">[docs]</a><span class="k">def</span> <span class="nf">maximized</span><span class="p">(</span><span class="n">mozwebqa</span><span class="p">):</span>
-    <span class="n">mozwebqa</span><span class="o">.</span><span class="n">selenium</span><span class="o">.</span><span class="n">maximize_window</span><span class="p">()</span>
-    <span class="k">return</span> <span class="bp">True</span>
-</pre></div></div>
+<div class="viewcode-block" id="pytest_runtest_setup"><a class="viewcode-back" href="../conftest.html#conftest.pytest_runtest_setup">[docs]</a><span class="k">def</span> <span class="nf">pytest_runtest_setup</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">cfme_data_filename</span><span class="p">:</span>
+        <span class="n">CfmeSetup</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">_read</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">cfme_data_filename</span><span class="p">)</span>
+
+</div>
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">)</span>  <span class="c"># IGNORE:E1101</span>
+<div class="viewcode-block" id="cfme_data"><a class="viewcode-back" href="../conftest.html#conftest.cfme_data">[docs]</a><span class="k">def</span> <span class="nf">cfme_data</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">CfmeSetup</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CfmeSetup"><a class="viewcode-back" href="../conftest.html#conftest.CfmeSetup">[docs]</a><span class="k">class</span> <span class="nc">CfmeSetup</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This class is just used for monkey patching</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span></div>
+</pre></div>
 
           </div>
         </div>
@@ -98,13 +107,16 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">cfme_tests .01 documentation</a> &raquo;</li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">CloudForms Management Engine Test library 0.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2013, Red Hat.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+        &copy; Copyright 2013, Brad Crochet.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>
